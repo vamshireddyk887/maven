@@ -1,0 +1,31 @@
+name: Java CI
+on:
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches:    
+      - main
+jobs:
+
+  Mavenbuild:
+    runs-on: ubuntu-latest
+    steps: 
+    - name: code checkout 
+      uses: actions/checkout@v3
+    
+    - name: Code Build
+      uses: actions/setup-java@v3
+      with:
+          distribution: "temurin"
+          java-version: '11'
+    -  run: |
+            pwd && ls -ltr 
+            mvn clean install 
+            
+    - name: Code Test
+      uses: actions/setup-java@v3
+      with:
+          distribution: "temurin"
+          java-version: '11'
+    -  run: |
+            pwd && ls -ltr 
+            mvn test
